@@ -1,5 +1,5 @@
 ---
-name: java-backend-unified-spec
+name: java-backend-fusion-specification
 description: Java 后端项目设计、实现、重构和代码审查的统一规范。凡是 AI 编码代理（Claude Code、Codex、Cursor、Aider 等）需要构建或修改 Java 后端，并应遵循模块优先组织、首选顶层模块命名 `infrastructure / persistence / business / web`、多入口项目使用 `interfaces`、大型第三方集成可选 `integration`、详细命名与注释规则、明确安全基线、可维护性治理，以及每个模块完成后全量回归该模块 API 时，使用本技能。
 ---
 
