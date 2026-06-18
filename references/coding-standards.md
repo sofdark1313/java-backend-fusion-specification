@@ -1,8 +1,8 @@
 # Java 后端编码规范
 
-## 7. 命名规范
+## 1. 命名规范
 
-### 7.1 目录与包命名
+### 1.1 目录与包命名
 
 - 实体目录统一使用 `model`
 - 禁止使用 `do` 作为目录名
@@ -32,7 +32,7 @@
 - 禁止占用 Java 平台与主流框架的命名空间:`java.*`、`javax.*`、`jakarta.*`、`org.springframework.*`、`org.apache.*`、`com.alibaba.*` 等不允许用作项目根包
 - 老项目继续沿用既有根包即可,不强制为对齐规范回改根包,避免破坏 ClassLoader、Bean 扫描路径、序列化兼容
 
-### 7.2 类命名
+### 1.2 类命名
 
 - 实体类：`XxxDO`
 - 枚举类：`XxxEnum`
@@ -58,7 +58,7 @@
 - 同一模块内不要混用 `XxxService` 和 `XxxApplicationService` 两套命名
 - `XxxWebAssembler` 与 `XxxConvert` 是两类不同角色，不要混成一个类
 
-### 7.3 接口路径
+### 1.3 接口路径
 
 - 默认接口路径统一使用 `/api/**`,这是所有项目的默认前缀,不需要刻意区分前后台
 - 路径统一使用短横线风格,如 `/api/confirm-order`
@@ -68,7 +68,7 @@
 - 一旦引入 `/admin/**`,后台 Controller、Assembler、常量、权限码必须显式带 `Admin` 前缀以示区分,例如 `AdminOrderController`、`OrderApiPaths.ADMIN_BASE`、`OrderPermissionCodes.ADMIN_ORDER_CONFIRM`
 - 不允许把后台接口和前台接口混在同一个 Controller 中,也不允许只靠路径前缀区分而不做命名隔离
 
-### 7.4 常量类命名
+### 1.4 常量类命名
 
 禁止出现魔法字符串和魔法数字。常量类统一按类别命名，不要把所有内容塞进 `Constants`：
 
@@ -90,7 +90,7 @@
 - `OrderConstant`
 - `SystemConstant`
 
-### 7.5 常量字段命名
+### 1.5 常量字段命名
 
 常量字段统一使用 `UPPER_SNAKE_CASE`。
 
@@ -101,7 +101,7 @@
 - 正则或路径匹配常量优先以 `_PATTERN` 结尾
 - 业务前缀、版本前缀、对象存储目录前缀等短字符串只要承载业务语义，也属于魔法字符串，例如 `"v"`、`"video-cut/export/"`
 
-### 7.6 常量值格式
+### 1.6 常量值格式
 
 - 错误码值：`UPPER_SNAKE_CASE`
 - 权限码值：`lower-hyphen-case`
@@ -110,7 +110,7 @@
 - 接口路径值：`/segment-name`
 - 安全匹配值：`/segment/**`
 
-### 7.7 常量类实现规则
+### 1.7 常量类实现规则
 
 常量类必须满足：
 
@@ -121,7 +121,7 @@
 - 可以提供少量 Key 拼装方法，但方法名必须是完整业务语义
 - 对版本号、对象存储路径、任务快照 Key 等带业务含义的字符串拼装，优先提供语义化常量和辅助方法，不要在业务代码里直接写字面量前缀
 
-### 7.8 枚举命名
+### 1.8 枚举命名
 
 - 枚举类统一使用 `XxxEnum` 结尾
 - 枚举项统一使用 `UPPER_SNAKE_CASE`
@@ -129,9 +129,9 @@
 - 不要在业务代码中重复散写 `XxxEnum.SOME_STATUS.getCode().equals(value)` 这类判断
 - 枚举静态判断内部默认使用 `ObjectUtil.equal(...)` 做空安全比较，避免在同一模块里混用 `equals(...)`、`Objects.equals(...)` 与其他工具风格
 
-## 8. 注释规范
+## 2. 注释规范
 
-### 8.1 默认要求
+### 2.1 默认要求
 
 - AI 生成或修改代码时，中文注释属于强制要求，不需要等待用户单独提出
 - 注释默认语言统一为中文，禁止在同一套后端规范代码中随意混用英文注释
@@ -140,7 +140,7 @@
 - 类、`public` / `protected` 方法、Repo 方法、关键业务字段、关键分支的中文注释都属于强制检查项
 - Controller 类和每个公开接口方法都属于强制注释对象，不能因为注解路径已经存在就省略方法注释
 
-### 8.2 类级注释
+### 2.2 类级注释
 
 以下类型默认必须写类级中文注释：
 
@@ -162,7 +162,7 @@
 
 类可以按需要使用注解，例如 `@Builder`、`@Getter`、`@Data`、`@NoArgsConstructor`、`@AllArgsConstructor`、`@Slf4j`、`@Service`、`@Component`、`@Configuration` 等，但注解不能替代类注释本身，也不能替代关键字段和关键方法的语义说明。
 
-### 8.3 方法注释
+### 2.3 方法注释
 
 以下方法默认必须写中文方法注释：
 
@@ -183,7 +183,7 @@
 - 可能抛出的业务异常
 - 事务、锁、重试、回调、副作用等约束
 
-### 8.4 字段注释
+### 2.4 字段注释
 
 以下字段必须补充中文注释：
 
@@ -203,7 +203,7 @@
 
 简单 DTO / VO / Request / Response 中名称非常直观、且没有额外业务语义的字段，可以在类注释已说明上下文时不重复逐字段展开；但只要字段承担状态、金额、权限、风控、外部映射、兼容分支等关键语义，就必须写清楚。
 
-#### 8.4.1 字段注释示例
+#### 2.4.1 字段注释示例
 
 推荐写法示例：
 
@@ -267,7 +267,7 @@ public class OrderDO {
 - 状态、类型、来源、原因、渠道等有限取值字段，优先抽成 `XxxEnum`，字段注释通过 `@see` 或 `{@link ...}` 指向对应枚举
 - 注释不能只把字段名翻译成中文，否则对维护、联调和评审帮助很弱
 
-#### 8.4.2 注解与字段注释配合示例
+#### 2.4.2 注解与字段注释配合示例
 
 ```java
 @Getter
@@ -297,7 +297,7 @@ public class OrderCreateResultVO {
 - 注解用于减少样板代码，不承担业务语义表达职责
 - 只要字段本身承载关键业务语义，仍然要写清晰的字段注释
 
-#### 8.4.3 纯数据载体对象的注解约束
+#### 2.4.3 纯数据载体对象的注解约束
 
 `Request`、`Response`、`Command`、`Query`、`VO` 这类纯数据载体对象，默认遵循以下规则：
 
@@ -428,7 +428,7 @@ public enum OrderStatusEnum {
 }
 ```
 
-### 8.5 行内注释
+### 2.5 行内注释
 
 行内注释只写“为什么”，重点覆盖：
 
@@ -441,7 +441,7 @@ public enum OrderStatusEnum {
 - 验签、重试、降级、兼容分支
 - 复杂 SQL 条件、排序、分页口径
 
-### 8.6 禁止事项
+### 2.6 禁止事项
 
 禁止以下注释：
 
@@ -451,13 +451,13 @@ public enum OrderStatusEnum {
 - 大段注释掉的旧代码
 - 中英文混杂但缺乏统一规范的注释
 
-### 8.7 修改代码时的要求
+### 2.7 修改代码时的要求
 
 - 只要修改了某个类或方法，就要同步检查并补齐其中文注释
 - 代码重构后必须同步更新注释，禁止保留旧语义注释
 - 评审时把“注释是否覆盖关键语义”作为必查项
 
-## 9. 数据库规范
+## 3. 数据库规范
 
 业务表默认字段：
 
@@ -479,7 +479,7 @@ public enum OrderStatusEnum {
 - 索引围绕查询条件、排序字段、唯一约束设计
 - 禁止把数据范围配置成 SQL 字符串片段
 
-## 11. 异常、日志与响应规范
+## 4. 异常、日志与响应规范
 
 统一原则：
 
@@ -521,7 +521,7 @@ public enum OrderStatusEnum {
 - 如果项目需要稳定返回参数错误或业务错误码，优先改用项目级断言 helper、`BizException`、或不会落入全局 `NullPointerException` 分支的统一异常写法
 - 默认不要直接依赖底层库原生 `Validate.notNull(...)` 的异常行为；如项目已经统一封装为项目级 `Validate.notNull(...)`，则应以该统一 helper 的稳定异常契约为准
 
-#### 11.1 `Validate` 与 `BizException` 使用边界
+### 4.1 `Validate` 与 `BizException` 使用边界
 
 - 这里的 `Validate` 默认指项目统一封装后的前置校验 helper，不要求业务代码直接拼 Apache Commons Lang3 与 Hutool 底层调用
 - 简单前置校验、简单守卫式失败、基础存在性校验，默认优先使用项目级 `Validate.notNull(...)`、`Validate.notBlank(...)`、`Validate.isTrue(...)`、`Validate.equal(...)`、`Validate.notEqual(...)`
@@ -543,14 +543,14 @@ Validate.notEqual(command.getCurrentStatus(), OrderStatusEnum.CANCELLED.getCode(
 BizAssert.notNull(orderDO, OrderErrorCodes.ORDER_NOT_FOUND, OrderErrorMessages.ORDER_NOT_FOUND);
 ```
 
-#### 11.2 项目级 `Validate` 统一前置校验能力
+### 4.2 项目级 `Validate` 统一前置校验能力
 
 - 对高频复用的基础前置校验，默认应先抽成项目级统一 helper，再在业务代码中复用
 - 默认提供 `notNull(...)`、`notBlank(...)`、`isTrue(...)`、`equal(...)`、`notEqual(...)` 等高频方法，不要把底层工具组合模板散落到每个 ServiceImpl
 - 如果项目底层依赖 Apache Commons Lang3、Hutool 或其他断言工具，应收口在 helper 内部，不要要求业务代码反复拼装
 - 项目级 `Validate` 应暴露稳定异常契约，例如统一抛 `IllegalArgumentException` 或项目约定的参数异常，而不是让调用方依赖底层库的偶发异常行为
 
-#### 11.3 `BizAssert` 统一业务断言能力
+### 4.3 `BizAssert` 统一业务断言能力
 
 - 需要稳定业务错误码、稳定异常契约、统一业务失败翻译时，推荐提供项目级业务断言工具
 - 默认命名使用 `BizAssert`；只有模块边界明确且断言能力确实隔离时，才使用 `XxxBizAssert`
@@ -558,15 +558,15 @@ BizAssert.notNull(orderDO, OrderErrorCodes.ORDER_NOT_FOUND, OrderErrorMessages.O
 - `BizAssert` 只负责把统一断言失败翻译成业务异常，不承载具体业务规则本身
 - `BizAssert` 常见能力包括 `notNull(...)`、`isTrue(...)`、`notBlank(...)` 等，但方法命名和异常契约必须在项目内保持一致
 
-## 12. 代码质量与可维护性规范
+## 5. 代码质量与可维护性规范
 
-### 12.1 单一职责与抽象层级
+### 5.1 单一职责与抽象层级
 
 - 一个类尽量聚焦一个主要职责
 - 一个方法只做一个抽象层级的事情
 - 当一个方法同时混杂“参数校验 + 业务编排 + 状态流转 + 持久化细节 + 第三方调用”时，必须拆分
 
-#### 12.1.1 重复模式自动抽离约束
+#### 5.1.1 重复模式自动抽离约束
 
 - 只要某个低层模板已经明确会复用，或非常明显后续还会继续出现，就应尽早抽离到合适抽象中，不要等复制扩散后再统一收口
 - 常见需要自动抽离的模式包括：前置校验模板、业务断言模板、枚举状态判断、对象组装、锁 Key 拼装、查询条件启停、第三方请求模板、结果解析模板
@@ -575,7 +575,7 @@ BizAssert.notNull(orderDO, OrderErrorCodes.ORDER_NOT_FOUND, OrderErrorMessages.O
 - 自动抽离不等于堆全局大杂烩；不要把跨层、跨语义的内容全部塞进 `CommonUtil`、`Helper`、`Utils`
 - 当模式只在一个小模块稳定复用时，优先抽到模块内最近的拥有者，不要过早升成全局基础设施
 
-#### 12.1.2 对象装配与 Convert 约束
+#### 5.1.2 对象装配与 Convert 约束
 
 - `Assembler` 和 `Convert` 是两层不同能力，不能混用
 - `Assembler` 默认位于 `web / interfaces`，负责 `Request -> Command`、`VO -> Response` 等入口层装配
@@ -585,7 +585,7 @@ BizAssert.notNull(orderDO, OrderErrorCodes.ORDER_NOT_FOUND, OrderErrorMessages.O
 - 只有在转换逻辑一次性、局部、极短，且抽 `convert` 反而降低可读性时，才允许直接在当前方法里写一个很短的 `Builder`
 - 不要把几十行对象装配散写在 Controller、Assembler、ServiceImpl 里
 
-#### 12.1.3 ServiceImpl 编排格式
+#### 5.1.3 ServiceImpl 编排格式
 
 `ServiceImpl`、`ApplicationServiceImpl` 这类用例编排方法，默认遵循以下结构：
 
@@ -617,7 +617,7 @@ public Long saveTimeline(SaveTimelineCommand saveTimelineCommand) {
 - 能抽到 `validateXxx()`、`buildXxx()`、`saveXxx()`、`queryXxx()` 的逻辑，优先抽出复用
 - `ServiceImpl` 负责串联，不负责塞满所有实现细节
 
-### 12.2 方法体控制
+### 5.2 方法体控制
 
 - 优先使用卫语句和早返回，降低嵌套深度
 - 普通业务方法默认不应超过 3 层嵌套
@@ -625,7 +625,7 @@ public Long saveTimeline(SaveTimelineCommand saveTimelineCommand) {
 - 复杂业务优先抽取 `XxxManager`、`XxxValidator`、`XxxPolicy`
 - 多个用例重复出现的校验、构造、状态流转、快照生成逻辑，优先抽成可复用方法或领域组件
 
-### 12.3 代码复用、DDD 与抽象
+### 5.3 代码复用、DDD 与抽象
 
 - 相同业务语义的校验逻辑，不要在多个 `ServiceImpl` 中重复散写，优先收口到 `Validator`、`Manager` 或复用私有方法
 - 相同业务语义的状态流转，不要在多个方法里各写一套，优先收口到领域模型、`Manager` 或 `Policy`
@@ -634,7 +634,7 @@ public Long saveTimeline(SaveTimelineCommand saveTimelineCommand) {
 - DDD 的重点是边界清晰、职责收口、规则聚合，不是机械堆叠术语或目录
 - 对已存在且稳定的 skill 规范代码，优先延续现有抽象，不要轻易推翻已有分层和命名口径
 
-### 12.4 空值与返回值
+### 5.4 空值与返回值
 
 - 列表、分页、批量结果默认不返回 `null`
 - 单对象 Repo 查询默认允许返回 `null`，由 `ServiceImpl`、`domain` 或统一业务断言能力翻译成业务语义
@@ -642,7 +642,7 @@ public Long saveTimeline(SaveTimelineCommand saveTimelineCommand) {
 - 不要把 Repo 返回的 `null` 继续向 `web / interfaces` 的对外契约暴露
 - 项目默认引入 Hutool 作为通用工具库。空值、空串、空集合判断以及常见工具能力，默认优先使用 Hutool，不要在同一模块中混用多套工具风格，也不要自己散写零散工具函数
 
-#### 12.4.1 判空工具统一约束
+#### 5.4.1 判空工具统一约束
 
 - 除非存在明确的特殊情况，否则对象空值判断强制使用 `ObjectUtil.isNull(...)`、`ObjectUtil.isNotNull(...)`
 - 除非存在明确的特殊情况，否则对象相等判断强制使用 `ObjectUtil.equal(...)`、`ObjectUtil.notEqual(...)`
@@ -681,7 +681,7 @@ public Page<EmployeeDO> page(String employeeName, String mobile, Integer status,
 .eq(status != null, EmployeeDO::getStatus, status)
 ```
 
-### 12.5 校验分层
+### 5.5 校验分层
 
 - `web / interfaces` 负责格式校验、必填校验、长度校验、枚举值校验
 - `domain` 或 `validator` 负责业务不变量、状态合法性、金额口径校验
@@ -749,7 +749,7 @@ if (employeeMapper.updateById(employeeDO) != 1) {
 - 其他高频重复模板也应按职责自动抽离，例如状态判断进枚举、对象组装进 `Convert`、锁键拼装进 `XxxLockKeys`、第三方调用模板进 `client`
 - 需要稳定业务错误码的“查无数据”“状态非法”“更新失败”等失败语义，必须在 `ServiceImpl`、`domain` 或统一业务断言能力中显式翻译
 
-#### 12.5.1 注解校验消息规范
+#### 5.5.1 注解校验消息规范
 
 - `@NotNull`、`@NotBlank`、`@Size` 等注解中的 `message` 必须使用面向业务的中文提示
 - 不要直接把字段名、英文属性名、技术字段名塞进提示文案
@@ -798,28 +798,28 @@ public class SaveTimelineCommand {
 
 - 反例片段只展示问题点，不作为可复制模板，避免把错误写法再次带回生成结果
 
-### 12.6 事务与一致性
+### 5.6 事务与一致性
 
 - 事务默认放在 `business` 编排层
 - 不要把事务散落在 Controller、Repo、Client
 - 涉及资金链路、状态流转、流水写入时，要明确事务边界和补偿策略
 - 涉及回调幂等时，要显式说明幂等键来源
 
-### 12.7 异常处理质量
+### 5.7 异常处理质量
 
 - 不允许吞异常
 - 只有在“转换异常语义、补充上下文、重试、降级、日志增强”时才允许 `catch`
 - 业务异常与系统异常必须区分清楚
 - 不要把所有异常都映射成同一个模糊错误码
 
-### 12.8 查询与性能
+### 5.8 查询与性能
 
 - 批量处理优先批量查库、批量写库，避免循环内查库形成 N+1
 - 多表联查、统计、导出、对账统一进入 XML
 - 分页查询必须保证排序口径明确
 - 对高频接口明确缓存、锁、幂等或防抖策略
 
-### 12.9 可读性与可评审性
+### 5.9 可读性与可评审性
 
 - 常量、枚举、异常、响应结构要语义清晰
 - 不允许散写业务字面量
@@ -827,7 +827,7 @@ public class SaveTimelineCommand {
 - 重要类、方法、关键分支必须带中文注释
 - 代码提交前至少完成一次“命名 / 注释 / 边界 / 异常 / 空值 / 重复逻辑”自检
 
-### 12.10 金额与时间
+### 5.10 金额与时间
 
 - 金额统一使用 `BigDecimal`
 - 禁止使用 `double` / `float` 做金额计算

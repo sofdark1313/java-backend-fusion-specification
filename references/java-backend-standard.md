@@ -2,13 +2,13 @@
 
 本目录按主题拆分为多个参考文件，默认不要整本通读，按当前任务选择相关文件即可。
 
-## 规则等级说明
+## 1. 规则等级说明
 
 - `必须`：新项目默认强制执行；老项目对本次修改范围内代码和结构必须尽量对齐
 - `推荐`：优先采用；老项目可按改造窗口逐步落地
 - `可选`：按项目类型、团队规模、合规要求、系统复杂度自行决定
 
-## 阅读建议
+## 2. 阅读建议
 
 - 做新项目结构设计、模块拆分、分层边界确认时，读 [architecture-and-boundaries.md](architecture-and-boundaries.md)
 - 做命名、注释、字段注释、校验、异常、代码质量约束时，读 [coding-standards.md](coding-standards.md)
@@ -18,7 +18,7 @@
 - 需要直接复用模板或统一检查清单时，读 [templates-and-checklists.md](templates-and-checklists.md)
 - 需要参考目录模板、类模板或 Java 示例实现时，读 [code-examples.md](code-examples.md)
 
-## 文件导航
+## 3. 文件导航
 
 - [architecture-and-boundaries.md](architecture-and-boundaries.md)
   - `目标`

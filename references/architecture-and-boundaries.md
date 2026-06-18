@@ -91,7 +91,7 @@ project-parent
 - 顶层模块在根包下展开,例如根包 `com.{org}.vibecodingplatform`,顶层模块对应 `com.{org}.vibecodingplatform.infrastructure`、`com.{org}.vibecodingplatform.business`,业务子模块再向下展开,如 `com.{org}.vibecodingplatform.business.order`
 - 项目根包与 Maven 坐标必须一致,`groupId` 取根包,`artifactId` 取项目名或模块切分名
 - 禁止使用 `com.example.*`、`com.demo.*` 等脚手架默认根包
-- 详见 [coding-standards.md](coding-standards.md) 第 7.1 节
+- 详见 [coding-standards.md](coding-standards.md) 第 1.1 节
 
 ## 5. 模块拆分规则
 

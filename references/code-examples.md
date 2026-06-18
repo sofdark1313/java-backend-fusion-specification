@@ -2,9 +2,9 @@
 
 以下内容基于 Spring Boot + MVC + 常见 ORM + 常见缓存 / 分布式锁组件的参考落地风格编写，仅作为“常见实现示例”，不构成对具体框架、中间件或基础设施的强制绑定。项目已有等价能力时，优先沿用现有稳定实现。
 
-## 15. 类模板清单
+## 1. 类模板清单
 
-### 15.1 infrastructure 层常见参考组件
+### 1.1 infrastructure 层常见参考组件
 
 ```text
 infrastructure
@@ -50,7 +50,7 @@ infrastructure
       └─ XxxAiClient.java
 ```
 
-### 15.2 persistence 层常见目录模板
+### 1.2 persistence 层常见目录模板
 
 ```text
 persistence
@@ -70,7 +70,7 @@ persistence
       └─ OrderQueryMapper.xml
 ```
 
-### 15.3 business 层常见目录模板
+### 1.3 business 层常见目录模板
 
 ```text
 business
@@ -105,7 +105,7 @@ business
          └─ OrderPolicy.java
 ```
 
-### 15.4 web / interfaces 层常见目录模板
+### 1.4 web / interfaces 层常见目录模板
 
 默认场景下,接口路径统一使用 `/api/**`,目录默认按 `web/api/...` 组织:
 
@@ -143,7 +143,7 @@ web
          └─ AdminOrderWebAssembler.java
 ```
 
-### 15.5 integration 层常见目录模板
+### 1.5 integration 层常见目录模板
 
 ```text
 integration
@@ -162,7 +162,7 @@ integration
       └─ XxxAiClient.java
 ```
 
-## 16. 单流程标准写法
+## 2. 单流程标准写法
 
 以“后台确认完单”为例，标准链路如下：
 
@@ -176,11 +176,11 @@ integration
 8. `persistence` 使用项目既有数据访问组件落库。
 9. AOP 或事件统一记录日志、审计和风控信息。
 
-## 17. 代码示例
+## 3. 代码示例
 
 以下示例只展示一种可参考实现风格，不构成对特定框架、中间件或 ORM 的强制绑定。
 
-### 17.1 基础实体示例
+### 3.1 基础实体示例
 
 ```java
 /**
@@ -222,7 +222,7 @@ public class BaseDO {
 }
 ```
 
-### 17.2 常量与枚举示例
+### 3.2 常量与枚举示例
 
 ```java
 /**
@@ -436,7 +436,7 @@ public enum OrderStatusEnum {
 }
 ```
 
-### 17.3 Controller / Request / Assembler / Convert 示例
+### 3.3 Controller / Request / Assembler / Convert 示例
 
 ```java
 /**
@@ -576,7 +576,7 @@ public class OrderConvert {
 }
 ```
 
-### 17.4 Command / Service / Domain 示例
+### 3.4 Command / Service / Domain 示例
 
 ```java
 /**
@@ -637,7 +637,7 @@ public class OrderManager {
 }
 ```
 
-### 17.5 ServiceImpl 示例
+### 3.5 ServiceImpl 示例
 
 ```java
 /**
@@ -694,7 +694,7 @@ public class OrderServiceImpl implements OrderService {
 }
 ```
 
-### 17.6 Repo / RepoImpl / XML 示例
+### 3.6 Repo / RepoImpl / XML 示例
 
 ```java
 @Override
@@ -804,7 +804,7 @@ public class OrderRepoImpl implements OrderRepo {
 </select>
 ```
 
-### 17.7 第三方 Client 示例
+### 3.7 第三方 Client 示例
 
 ```java
 /**
@@ -848,7 +848,7 @@ public class XxxAiClient implements AiClient {
 }
 ```
 
-### 17.8 Validate 示例
+### 3.8 Validate 示例
 
 ```java
 /**
@@ -925,7 +925,7 @@ public final class Validate {
 }
 ```
 
-### 17.9 BizAssert 示例
+### 3.9 BizAssert 示例
 
 ```java
 /**
@@ -966,7 +966,7 @@ public final class BizAssert {
 }
 ```
 
-### 17.10 全局异常处理示例
+### 3.10 全局异常处理示例
 
 ```java
 /**
